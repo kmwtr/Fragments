@@ -7,31 +7,17 @@ from PIL import Image, ImageDraw, ImageColor
 # Debug Setting
 log.basicConfig(level=log.DEBUG, format='%(asctime)s | %(levelname)s | %(message)s')
 
-# Resurrect 64
-resurrect64_plus = [
+heatmap = [
     '#000000',
-    '#2e222f', '#3e3546', '#625565', '#966c6c', '#ab947a', '#694f62', '#7f708a', '#9babb2',
-    '#c7dcd0', '#ffffff', '#6e2727', '#b33831', '#ea4f36', '#f57d4a', '#ae2334', '#e83b3b', 
-    '#fb6b1d', '#f79617', '#f9c22b', '#7a3045', '#9e4539', '#cd683d', '#e6904e', '#fbb954',
-    '#4c3e24', '#676633', '#a2a947', '#d5e04b', '#fbff86', '#165a4c', '#239063', '#1ebc73',
-    '#91db69', '#cddf6c', '#313638', '#374e4a', '#547e64', '#92a984', '#b2ba90', '#0b5e65',
-    '#0b8a8f', '#0eaf9b', '#30e1b9', '#8ff8e2', '#323353', '#484a77', '#4d65b4', '#4d9be6',
-    '#8fd3ff', '#45293f', '#6b3e75', '#905ea9', '#a884f3', '#eaaded', '#753c54', '#a24b6f',
-    '#cf657f', '#ed8099', '#831c5d', '#c32454', '#f04f78', '#f68181', '#fca790', '#fdcbb0',
-    '#000000'
-    ]
-
-color_palette = [
-    '#000000',
-    '#2e222f', '#694f62', '#6e2727', '#ae2334', '#7a3045', '#4c3e24', '#165a4c', '#313638', 
-    '#0b5e65', '#323353', '#45293f', '#753c54', '#831c5d', '#3e3546', '#7f708a', '#b33831',
-    '#e83b3b', '#9e4539', '#676633', '#239063', '#374e4a', '#0b8a8f', '#484a77', '#6b3e75',
-    '#a24b6f', '#c32454', '#625565', '#9babb2', '#ea4f36', '#fb6b1d', '#cd683d', '#a2a947',
-    '#1ebc73', '#547e64', '#0eaf9b', '#4d65b4', '#905ea9', '#cf657f', '#f04f78', '#966c6c',
-    '#c7dcd0', '#f57d4a', '#f79617', '#e6904e', '#d5e04b', '#91db69', '#92a984', '#30e1b9', 
-    '#4d9be6', '#a884f3', '#ed8099', '#f68181', '#ab947a', '#ffffff', '#f9c22b', '#fbb954',
-    '#fbff86', '#cddf6c', '#b2ba90', '#8ff8e2', '#8fd3ff', '#eaaded', '#fca790', '#fdcbb0',
-    '#000000'
+    '#142966', '#152a67', '#152b68', '#152e6a', '#152f6b', '#15326d', '#15356f', '#153872',
+    '#153b74', '#154078', '#16447b', '#16497f', '#164e83', '#175387', '#18588a', '#185d8e',
+    '#1a6291', '#1b6794', '#1d6c97', '#1f729a', '#22769b', '#257c9e', '#2881a0', '#2b86a1',
+    '#2f8ca3', '#3491a4', '#3897a4', '#3d9ca4', '#42a1a4', '#48a6a4', '#4daba4', '#54afa4',
+    '#5ab3a3', '#5fb6a1', '#67b99e', '#6fbc99', '#78bf94', '#81c28e', '#8bc488', '#94c682', 
+    '#9dc87c', '#a6ca76', '#adcb72', '#b5cb6d', '#bdcc69', '#c2cc67', '#cccb66', '#d3c766', 
+    '#dac266', '#e0bc66', '#e5b666', '#e9b166', '#eeb066', '#f1b06b', '#f4b372', '#f6b97a',
+    '#f8c388', '#f9cd93', '#f9d79e', '#fae1aa', '#faeab4', '#faf0bb', '#faf8c4', '#fbfcc8',
+    '#ff0000'
     ]
 
 # -------------------------------------------------
@@ -90,12 +76,14 @@ def draw_image(pixel: list, whidth = 64):
     for y in range(height):
         for x in range(whidth):
             color_index = pixel[(y * whidth) + x]
-            #draw.point((x, y), fill=ImageColor.getrgb(color_palette[color_index]))
+            draw.point((x, y), fill=ImageColor.getrgb(heatmap[color_index]))
+            '''
             if color_index == 65:
                 draw.point((x, y), fill=(255, 0, 0))
             elif color_index > 0:
                 color_index = 127 + (color_index * 2)
                 draw.point((x, y), fill=(color_index, color_index, color_index))
+                '''
             
     # とりあえず2倍の画像にする
     canvas_object = canvas_object.resize((whidth * 2, height * 2), Image.NEAREST)
@@ -127,5 +115,5 @@ def hex_mosaic(file_name: str):
 # -------------------------------------------------
 
 if __name__ is '__main__':
-    hex_mosaic('chinchillasystems_logo_mono.bin')
+    hex_mosaic(r"D:\Projects\HW_Stela\RK_Stela\Armbian_focal_wifi_nano_2102_buckup.img")
     #os.system('PAUSE')
