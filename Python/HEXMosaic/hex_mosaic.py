@@ -127,6 +127,5 @@ def hex_mosaic(file_name: str):
 # -------------------------------------------------
 
 if __name__ is '__main__':
-    hex_mosaic(r"D:\Projects\HW_Stela\RK_Stela\Armbian_focal_wifi_nano_2102_buckup.img")
-    #hex_mosaic('chinchillasystems_logo_mono.bin')
+    hex_mosaic('chinchillasystems_logo_mono.bin')
     #os.system('PAUSE')
