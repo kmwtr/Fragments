@@ -7,8 +7,6 @@ from PIL import Image, ImageDraw, ImageColor
 # Debug Setting
 log.basicConfig(level=log.DEBUG, format='%(asctime)s | %(levelname)s | %(message)s')
 
-# -------------------------------------------------
-
 # Resurrect 64
 resurrect64_plus = [
     '#000000',
@@ -87,22 +85,21 @@ def draw_image(pixel: list, whidth = 64):
     log.debug('whidth: ' + str(whidth) +  ' height: ' + str(height))
 
     canvas_object = Image.new('RGB', (whidth, height), (0,0,0))
-    canvas_object_bw = Image.new('RGB', (whidth, height), (0,0,0))
     draw = ImageDraw.Draw(canvas_object)
-    draw_bw = ImageDraw.Draw(canvas_object_bw)
 
     for y in range(height):
         for x in range(whidth):
             color_index = pixel[(y * whidth) + x]
-            draw.point((x, y), fill=ImageColor.getrgb(color_palette[color_index]))
-            if color_index > 0:
-                draw_bw.point((x, y), (1,1,1))
+            #draw.point((x, y), fill=ImageColor.getrgb(color_palette[color_index]))
+            if color_index == 65:
+                draw.point((x, y), fill=(255, 0, 0))
+            elif color_index > 0:
+                color_index = 127 + (color_index * 2)
+                draw.point((x, y), fill=(color_index, color_index, color_index))
             
     # とりあえず2倍の画像にする
     canvas_object = canvas_object.resize((whidth * 2, height * 2), Image.NEAREST)
-    canvas_object_bw = canvas_object.resize((whidth * 2, height * 2), Image.NEAREST)
     canvas_object.save('hex_mosaic.png')
-    canvas_object_bw.save('hex_mosaic_bw.png')
 
     return 0
 
