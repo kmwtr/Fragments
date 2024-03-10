@@ -1,4 +1,4 @@
-# gamedev
+# pyxel test
 
 ## Dependencies
 
