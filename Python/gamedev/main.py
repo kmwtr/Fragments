@@ -1,7 +1,7 @@
 import pyxel
-from pyxelunicode import PyxelUnicode
+import PyxelUniversalFont as puf
 
-pyuni = PyxelUnicode(r'D:\Github\Fragments\Python\gamedev\PixelMplus-20130602\PixelMplus12-Regular.ttf', 12)
+writer = puf.Writer("misaki_gothic.ttf")
 
 class App:
     def __init__(self):
@@ -13,10 +13,10 @@ class App:
         self.x = (self.x + 1) % pyxel.width
 
     def draw(self):
-        pyuni.text(16, 16, '共和国の解体と再生')
+        writer.draw(16, 16, '共和国の解体と再生', 16, 2)
+        pyxel.rect(0, 0, 16, 16, 1)
         pyxel.show()
         pyxel.cls(0)
-        pyxel.rect(self.x, 0, 8, 8, 9)
 
 
 if __name__ == "__main__":
