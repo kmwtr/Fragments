@@ -27,5 +27,5 @@ pip install pyxel pyxel-universal-font
 
 ### Dependencies
 
-* Mozjpeg
-
+* cjpeg
+* jpegtran
